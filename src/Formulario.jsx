@@ -15,7 +15,7 @@ const Formulario = () =>
       .then((propiedades) => setPropiedades(propiedades))
   }, []);
 
-  const [selectedPropiedad, setSelectedPropiedad] = useState("");
+  const [selectedPropiedad, setSelectedPropiedad] = useState(-1);
 
   const handlePropiedadChange = (event) => 
     { 
@@ -33,7 +33,7 @@ const Formulario = () =>
         .then((ubicaciones) => setUbicaciones(ubicaciones))
     }, []);
 
-    const [selectedUbicacion, setSelectedUbicacion] = useState("");
+    const [selectedUbicacion, setSelectedUbicacion] = useState(-1);
 
     const handleUbicacionChange = (event) =>
     {
@@ -49,7 +49,7 @@ const Formulario = () =>
         if (selectedPropiedad && selectedUbicacion && metros2)
          {
           const costoM2 = 35.9;
-          const cotizacion = costoM2 * selectedPropiedad * selectedUbicacion * metros2;
+          const cotizacion = costoM2 * propiedades[selectedPropiedad].factor * ubicaciones[selectedUbicacion].factor * metros2;
     
           setValorPoliza(cotizacion.toFixed(2));
           console.log(cotizacion)
@@ -60,14 +60,15 @@ const Formulario = () =>
     {
       const datosCotizacion = {
                           fechaCotizacion: new Date().toLocaleString(),
-                          propiedad:       selectedPropiedad,
-                          ubicacion:       selectedUbicacion,
+                          propiedad:       propiedades[selectedPropiedad].tipo,
+                          ubicacion:       ubicaciones[selectedUbicacion].tipo,
                           metrosCuadrados: metros2,
                           poliza:          valorPoliza,
                          }
       const historial = JSON.parse(localStorage.getItem("historial")) || []
             historial.push(datosCotizacion)
             localStorage.setItem("historial", JSON.stringify(historial))
+
     }
     
     return (
@@ -78,17 +79,17 @@ const Formulario = () =>
               <div>
               <label htmlFor="propiedad">Seleccione el Tipo de Propiedad</label>
                 <select id="propiedad" value={selectedPropiedad} onChange={ handlePropiedadChange}>
-                    <option value="">Seleccionar</option>
-                    {propiedades.map(propiedad => 
-                    (<option key={propiedad.id} value={propiedad.factor}>{propiedad.tipo}</option>))}
+                    <option value={-1}>Seleccionar</option>
+                    {propiedades.map((propiedad,i) => 
+                    (<option key={propiedad.id} value={i} >{propiedad.tipo}</option>))}
                 </select>
               </div>
               <div>
               <label htmlFor="ubicacion">Seleccione su Ubicación</label>
                 <select id="ubicacion" value={selectedUbicacion} onChange={handleUbicacionChange}>
-                   <option>Seleccionar</option>
-                   {ubicaciones.map(ubicacion => 
-                   (<option key={ubicacion.id} value={ubicacion.factor} >{ubicacion.tipo}</option>))}
+                   <option value={-1}>Seleccionar</option>
+                   {ubicaciones.map((ubicacion,i) => 
+                   (<option key={ubicacion.id} value={i} >{ubicacion.tipo}</option>))}
                 </select>
               </div>
               <div>

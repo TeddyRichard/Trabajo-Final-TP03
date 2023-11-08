@@ -12,7 +12,7 @@ const Historial = () =>
         
         <>
            <h1 className="center separador">Ver Historial 📋</h1>
-           <div className=" center div-cotizador">
+           <div className=" center div-cotizador">          
              <table>
               <thead>
                 <tr>
@@ -27,13 +27,15 @@ const Historial = () =>
                 <tr>
                 
                     {historialCotizaciones.map(cotizaciones => 
-                    (<div>
+                    (
+                    <>
                      <td key={cotizaciones.fechaCotizacion}>{cotizaciones.fechaCotizacion}</td>
                      <td key={cotizaciones.propiedad}>{cotizaciones.propiedad}</td>
                      <td key={cotizaciones.ubicacion}>{cotizaciones.ubicacion}</td>
                      <td key={cotizaciones.metrosCuadrados}>{cotizaciones.metrosCuadrados}</td>
                      <td key={cotizaciones.poliza}>{cotizaciones.poliza}</td>
-                    </div>))} 
+                    </>
+                    ))} 
                   
                 </tr>
              </tbody>
