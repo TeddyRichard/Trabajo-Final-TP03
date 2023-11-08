@@ -41,6 +41,19 @@ label
     border-radius: 0.7rem;
 }
 
+#elemento
+{
+    display: grid;
+    grid-template-rows:auto ;
+    grid-template-columns: 200px 200px 200px 100px 150px;
+}
+
+#titulo
+{
+    display: grid;
+    grid-template-rows: auto ;
+    grid-template-columns: 200px 200px 200px 100px 150px;
+}
 
 div.historial 
 {

@@ -13,9 +13,9 @@ const Historial = () =>
         <>
            <h1 className="center separador">Ver Historial 📋</h1>
            <div className=" center div-cotizador">          
-             <table>
+             <table className="elemento">
               <thead>
-                <tr>
+                <tr id="titulo">
                     <th>Fecha de cotización</th>
                     <th>Propiedad</th>
                     <th>Ubicación</th>
@@ -24,7 +24,7 @@ const Historial = () =>
                 </tr>
               </thead>
              <tbody>
-                <tr>
+                <tr id="elemento">
                 
                     {historialCotizaciones.map(cotizaciones => 
                     (
